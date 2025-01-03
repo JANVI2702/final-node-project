@@ -1,0 +1,58 @@
+<%- include('../partials/header.ejs')%>
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+                <h3 class="fw-bold mb-3">Add Product Page</h3>
+                <ul class="breadcrumbs mb-3">
+                    <li class="nav-home">
+                        <a href="/">
+                            <i class="icon-home"></i>
+                        </a>
+                    </li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0)">Product</a>
+                    </li>
+                    <li class="separator">
+                        <i class="icon-arrow-right"></i>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:void(0)">Add Product</a>
+                    </li>
+                </ul>
+            </div>
+            <h1>Your Cart</h1>
+            <% if (cart.length > 0) { %>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% cart.forEach(item => { %>
+                    <tr>
+                      <td><%= item.productId.name %></td>
+                      <td>$<%= item.productId.price %></td>
+                      <td><%= item.quantity %></td>
+                      <td>$<%= item.productId.price %></td>
+                    </tr>
+                  <% }); %>
+                </tbody>
+              </table>
+              <p>
+                <strong>Total Amount: </strong> $
+                <%= cart.reduce((total, item) => total + item.productId.price * item.quantity, 0) %>
+              </p>
+            <% } else { %>
+              <p>Your cart is empty.</p>
+            <% } %>
+            <a href="/product/view-product">Continue Shopping</a>
+        </div>
+    </div>
+    <%- include('../partials/footer.ejs')%>
